@@ -4,6 +4,7 @@ use Phpcl\Image\Strategy\PlainFill;
 #[description("Creates a single image with a white background (by default)")]
 class Canvas
 {
+    const DEFAULT_FG     = [0x00, 0x00, 0x00];
     const DEFAULT_BG     = [0xFF, 0xFF, 0xFF];
     const DEFAULT_WIDTH  = 100;
     const DEFAULT_HEIGHT = 100;
@@ -13,15 +14,18 @@ class Canvas
     #[
         int("width"),
         int("height")
-        array("bgColor" : [R,G,B]),
+        array("bgColor" : [R,G,B],
+        array("fgColor" : [R,G,B]),
     ]
     public function __construct(
         public int    $width    = self::DEFAULT_WIDTH,
-        public int    $height   = self::DEFAULT_HEIGHT
+        public int    $height   = self::DEFAULT_HEIGHT,
+        public array  $fgColor  = self::DEFAULT_FG,
         public array  $bgColor  = self::DEFAULT_BG)
     {
         $this->image    = \imagecreate($width, $height);
-        $this->bgColor  = $this->colorAlloc($bg_color);
+        $this->fgColor  = $this->colorAlloc($fgColor);
+        $this->bgColor  = $this->colorAlloc($bgColor);
         $this->writeFill();
     }
     #[description("Allocates a color resource")]

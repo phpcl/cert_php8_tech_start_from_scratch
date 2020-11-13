@@ -1,0 +1,23 @@
+version: "3"
+services:
+  cert-php8-cloud-tech:
+    container_name: cert_php8_tech
+    hostname: cert_php8_tech
+    image: phpcl/cert_php8_tech
+    volumes:
+     - .:/repo
+    ports:
+     - 8888:80
+    build: ./docker
+    restart: always
+    command: lfphp --mysql --apache --phpfpm
+    networks:
+      app_net:
+        ipv4_address: 172.16.8.88
+
+networks:
+  app_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.16.8.0/24"
