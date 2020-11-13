@@ -3,10 +3,9 @@
         "composer/composer": "*"
     },
     "autoload" : {
-		"psr-4" : {
-			"Php7\\" : "src/Php7",
-			"Php8\\" : "src/Php8",
-			"Display\\" : "src/Display"
-		}
-	}
+        "psr-4" : {
+            "Phpcl\\" : "src/Phpcl",
+            "Server\\" : "src/Server"
+        }
+    }
 }
