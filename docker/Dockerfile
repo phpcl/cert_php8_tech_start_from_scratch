@@ -26,7 +26,12 @@ RUN \
     mysql -uroot -v -e "FLUSH PRIVILEGES;"
 RUN \
     echo "Installing phpMyAdmin ..." && \
-    lfphp-get phpmyadmin
+    lfphp-get phpmyadmin && \
+    chgrp -R apache /srv/phpmyadmin && \
+    chmod -R 775 /srv/phpmyadmin && \
+    export SECRET=`php -r 'echo base64_encode(random_bytes(24));'` && \
+    echo "\$cfg['blowfish_secret'] = '$SECRET';" >> /srv/phpmyadmin/config.inc.php && \
+    sed -i 's/global/error_reporting(E_ERROR)\;  global/g' /srv/phpmyadmin/index.php
 RUN \
     echo "Setting up Apache ..." && \
     echo "ServerName cert_php8_tech" >> /etc/httpd/httpd.conf

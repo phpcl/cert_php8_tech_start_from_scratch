@@ -1,6 +1,6 @@
 <?php
 namespace Phpcl\Image\Strategy;
-use Php8\Image\SingleChar;
+use Phpcl\Image\ImageInterface;
 #[description("Fills image")]
 class PlainFill
 {
@@ -13,7 +13,7 @@ class PlainFill
     #[int("color")]
     #[returns("bool")]
     public static function writeFill(
-        SingleChar $char,
+        ImageInterface $char,
         int $x1,
         int $y1,
         int $x2,
