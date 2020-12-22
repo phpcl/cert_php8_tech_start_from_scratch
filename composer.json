@@ -1,11 +1,12 @@
 {
     "require": {
-        "composer/composer": "*"
+        "linuxforphp/linuxforcomposer": "^2.0",
+        "phpmailer/phpmailer" : "^6.1"
     },
     "autoload" : {
         "psr-4" : {
-            "Phpcl\\" : "src/Phpcl",
-            "Server\\" : "src/Server"
+            "PhpTraining\\" : "src/PhpTraining/",
+            "SimpleHtml\\" : "src/SimpleHtml/"
         }
     }
 }
