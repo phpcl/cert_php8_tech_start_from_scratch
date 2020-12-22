@@ -5,6 +5,7 @@ LFC_DIR=$DIR/vendor/linuxforphp/linuxforcomposer/bin
 LFC_PID=$DIR/vendor/composer
 export URL="php8cloudtech.net"
 export CONTAINER="php8_cloud_tech"
+export DOC_ROOT=""
 export USAGE="Usage: lfc.sh up|down|start|stop|deploy|init|shell|swap|creds"
 export INIT=0
 export SWAP=0
@@ -20,7 +21,7 @@ if [[ "$1" = "start" || "$1" = "stop" || "$1" = "deploy" ]]; then
 elif [[ "$1" = "creds" ]]; then
     php $TOOLS_DIR/generate_creds.php $2 $3 $4 $5 $6
 elif [[ "$1" = "up" ]]; then
-    docker-compose up -d --build
+    docker-compose up -d $2
     SWAP=1
     INIT=1
 elif [[ "$1" = "down" ]]; then
@@ -52,7 +53,7 @@ if [[ "$SWAP" = "1" ]]; then
         docker exec $CONTAINER /bin/bash -c "ln -s /srv/tempo/$URL/src/config/config.php /srv/repo/src/config/config.php"
         docker exec $CONTAINER /bin/bash -c "cd /srv/repo && php composer.phar update"
         docker exec $CONTAINER /bin/bash -c "mv -f /srv/www /srv/www.OLD"
-        docker exec $CONTAINER /bin/bash -c "ln -s /srv/repo/public /srv/www"
+        docker exec $CONTAINER /bin/bash -c "ln -s /srv/repo$DOC_ROOT /srv/www"
         docker exec $CONTAINER /bin/bash -c "chgrp apache /srv/www"
         docker exec $CONTAINER /bin/bash -c "chgrp -R apache /srv/repo"
         docker exec $CONTAINER /bin/bash -c "chmod -R 775 /srv/repo"
