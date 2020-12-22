@@ -20,8 +20,7 @@ RUN \
     echo git clone https://%%REPO_USER%%:%%REPO_TOKEN%%@%%REPO_URL_SHORT%% %%REPO_BRANCH%% %%BASE_DIR%%/%%URL%% && \
     cd %%BASE_DIR%%/%%URL%% && \
     sed -i 's/\^7.2/\*/g' vendor/linuxforphp/linuxforcomposer/composer.json && \
-    php composer2.phar self-update --stable && \
-    php composer2.phar update
+    php composer.phar update
 RUN \
     echo "Update config file ..." && \
     cd %%BASE_DIR%%/%%URL%% && \
