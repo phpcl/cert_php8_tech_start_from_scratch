@@ -7,8 +7,8 @@ RUN \
 RUN \
     echo "Compiling PHP 8 ..." && \
     cp /bin/lfphp-compile /bin/lfphp-compile-php8 && \
-    sed -i 's/8.0.0dev/8.0.1/g' /bin/lfphp-compile-php8 && \
-    sed -i 's/phpverscheckout=master/phpverscheckout=PHP-8.0.1/g' /bin/lfphp-compile-php8 && \
+    sed -i 's/8.0.0dev/8.0/g' /bin/lfphp-compile-php8 && \
+    sed -i 's/phpverscheckout=master/phpverscheckout=PHP-8.0/g' /bin/lfphp-compile-php8 && \
     sed -i 's/--prefix=\/usr/--prefix=\/usr --with-ffi --with-zip/g' /bin/lfphp-compile-php8 && \
     /bin/lfphp-compile-php8
 RUN \
